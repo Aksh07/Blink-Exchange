@@ -87,4 +87,69 @@ router.get("/sell/:id", async (req, res) => {
     });
 });
 
+// Get all buy requests of a users
+
+router.get("/buy/:user", async (req, res) => {
+    const user = req.params.user;
+    client.connect(async (err, db) => {
+        if(err)
+            throw err;
+        let dbo = await db.db("BlinkDatabase");
+        await dbo.collection("buyItems").find({Owner: user}).sort({postDate: -1}).toArray(async (err, queryResult) => {
+            if(err) throw err;
+            res.json(queryResult);
+        });
+        db.close();
+    });
+});
+
+// Get all sell requests of a users
+
+router.get("/sell/:user", async (req, res) => {
+    const user = req.params.user;
+    client.connect(async (err, db) => {
+        if(err)
+            throw err;
+        let dbo = await db.db("BlinkDatabase");
+        await dbo.collection("sellItems").find({Owner: user}).sort({postDate: -1}).toArray(async (err, queryResult) => {
+            if(err) throw err;
+            res.json(queryResult);
+        });
+        db.close();
+    });
+});
+
+// Get all items for sale of a particular Category
+
+router.get("/sell/:category", async (req, res) => {
+    const type = req.params.category;
+    client.connect(async (err, db) => {
+        if(err)
+            throw err;
+        let dbo = await db.db("BlinkDatabase");
+        await dbo.collection("sellItems").find({Type: user}).sort({postDate: -1}).toArray(async (err, queryResult) => {
+            if(err) throw err;
+            res.json(queryResult);
+        });
+        db.close();
+    });
+});
+
+// Get all items requested in a particular Category
+
+router.get("/buy/:category", async (req, res) => {
+    const type = req.params.category;
+    client.connect(async (err, db) => {
+        if(err)
+            throw err;
+        let dbo = await db.db("BlinkDatabase");
+        await dbo.collection("buyItems").find({Type: user}).sort({postDate: -1}).toArray(async (err, queryResult) => {
+            if(err) throw err;
+            res.json(queryResult);
+        });
+        db.close();
+    });
+});
+
+
 module.exports = router;
