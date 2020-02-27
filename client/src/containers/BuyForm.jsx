@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/searchstyle.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -184,11 +183,7 @@ class BuyForm extends Component {
               <h4>
                 <Badge variant="danger" placeholder={this.state.photo}>
                   Upload Image
-                  <input
-                    type="file"
-                    accept=".jpg.png.jpeg"
-                    onChange={this.onPictureChange}
-                  />
+                  <input type="file" onChange={this.onPictureChange} />
                 </Badge>
               </h4>
             </Form.Group>

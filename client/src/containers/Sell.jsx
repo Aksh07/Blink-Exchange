@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Row } from "react-bootstrap";
 import "../css/searchstyle.css";
 
 class Sell extends Component {
@@ -13,7 +14,7 @@ class Sell extends Component {
   };
 
   catalogSellButtonClick = () => {
-    window.location.href = "/sell/catalog";
+    window.location.href = "/sellcatalog";
   };
 
   render() {
@@ -30,7 +31,7 @@ class Sell extends Component {
               <ul>
                 <li>
                   <a href="/buy" title="Buy">
-                    Sell
+                    Buy
                   </a>
                 </li>
 
@@ -50,15 +51,17 @@ class Sell extends Component {
         </div>
         <h1 align="center">Selling Products and Services made Easy </h1>
 
-        <button onClick={this.sellSearchButtonClick} className="btn third">
-          Search
-        </button>
-        <button onClick={this.addSellButtonClick} className="btn fourth">
-          Add a new item
-        </button>
-        <button onClick={this.catalogSellButtonClick} className="btn fourth">
-          Catalog
-        </button>
+        <Row>
+          <button onClick={this.sellSearchButtonClick} className="btn fourth">
+            Search
+          </button>
+          <button onClick={this.addSellButtonClick} className="btn fourth">
+            Add a new item
+          </button>
+          <button onClick={this.catalogSellButtonClick} className="btn fourth">
+            Catalog
+          </button>
+        </Row>
       </div>
     );
   }

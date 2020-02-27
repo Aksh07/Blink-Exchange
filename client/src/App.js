@@ -6,6 +6,9 @@ import Buy from "./containers/Buy";
 import Sell from "./containers/Sell";
 import BuyForm from "./containers/BuyForm";
 import SellForm from "./containers/SellForm";
+import BuyCatalog from "./containers/BuyCatalog";
+import SellCatalog from "./containers/SellCatalog";
+import Error from "./containers/Error";
 
 class App extends Component {
   render() {
@@ -18,8 +21,8 @@ class App extends Component {
             <Route path="/sell" component={Sell} />
             <Route path="/newbuy" component={BuyForm} />
             <Route path="/newsell" component={SellForm} />
-            <Route path="/buy/catalog" componnet={BuyCatalog} />
-            <Route path="/sell/catalog" component={SellCatalog} />
+            <Route path="/buycatalog" component={BuyCatalog} />
+            <Route path="/sellcatalog" component={SellCatalog} />
             <Route component={Error} />
           </Switch>
         </div>

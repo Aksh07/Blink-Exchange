@@ -22,7 +22,7 @@ router.post("/users", (req, res) => {
     let dbo = db.db("BlinkDatabase");
     dbo.collection("users").insertOne(newUser, (err, queryResult) => {
       if (err) throw err;
-      res.redirect("/");
+      res.sendStatus(200);
     });
     db.close();
   });
@@ -52,7 +52,7 @@ router.post("/sell", (req, res) => {
     let dbo = db.db("BlinkDatabase");
     dbo.collection("sellItems").insertOne(newSellItem, (err, queryResult) => {
       if (err) throw err;
-      res.redirect("/");
+      res.sendStatus(200);
     });
     db.close();
   });
