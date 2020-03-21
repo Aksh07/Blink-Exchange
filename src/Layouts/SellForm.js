@@ -23,6 +23,14 @@ const style = {
   TextField: { font: "Roboto" }
 };
 
+const toBase64 = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+
 class SellForm extends Component {
   state = {
     productName: "",
@@ -30,7 +38,8 @@ class SellForm extends Component {
     contactNo: "",
     currentDate: "2020-03-21",
     typeOfService: "",
-    comments: ""
+    comments: "",
+    imgSrc: ""
   };
 
   handleNameChange = newValue => {
@@ -57,8 +66,14 @@ class SellForm extends Component {
     this.setState({ comments: newValue.target.value });
   };
 
+  handleImageChange = async picture => {
+    this.setState({ imgSrc: picture.target.files[0] });
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
+    let base64Url = await toBase64(this.state.imgSrc);
+    this.setState({ imgSrc: base64Url });
     const response = await fetch("/apis/post/buy", {
       method: "POST",
       headers: {
@@ -69,7 +84,8 @@ class SellForm extends Component {
         emailId: this.state.emailId,
         contactNo: this.state.contactNo,
         typeOfService: this.state.typeOfService,
-        earliestDeliveryDate: this.state.currentDate
+        lastDeliveryDate: this.state.currentDate,
+        photoUrl: base64Url
       })
     });
     if (response.status === 200) {
@@ -85,7 +101,8 @@ class SellForm extends Component {
       currentDate: "2020-03-21",
       typeOfService: "",
       email: "",
-      commnets: ""
+      comments: "",
+      imgSrc: ""
     });
   };
 
@@ -185,6 +202,19 @@ class SellForm extends Component {
                     fullWidth
                   />
                 </Grid>
+                <Grid item xs={4} md={3} />
+                <Grid item xs={8} md={7}>
+                  <input
+                    accept="image/*"
+                    id="inputClass"
+                    type="file"
+                    onChange={this.handleImageChange}
+                    fullwidth
+                    gutterBottom
+                  />
+                  <label htmlFor="inputClass"></label>
+                </Grid>
+                <Grid item xs={7} md={2}></Grid>
                 <Grid item xs={4} md={3}>
                   <Button
                     variant="contained"
