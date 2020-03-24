@@ -111,6 +111,7 @@ class SellForm extends Component {
       <Fragment>
         <Helmet>
           <style>{"body { background-color: #003366;}"}</style>
+          <title>Add an item for Sale</title>
         </Helmet>
         <Header />
         <Grid

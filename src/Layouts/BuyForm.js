@@ -94,6 +94,7 @@ class BuyForm extends Component {
       <Fragment>
         <Helmet>
           <style>{"body { background-color: #003366;}"}</style>
+          <title>Add a Buy Request</title>
         </Helmet>
         <Header />
         <Grid

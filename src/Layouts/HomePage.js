@@ -15,6 +15,7 @@ function HomePage() {
     <Fragment>
       <Helmet>
         <style>{"body { background-color: #003366;}"}</style>
+        <title>Home</title>
       </Helmet>
       <Header />
       <Grid

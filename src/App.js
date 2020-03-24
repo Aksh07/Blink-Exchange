@@ -1,14 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import {
-  HomePage,
-  Buy,
-  Sell,
-  BuyForm,
-  SellForm,
-  BuyCatalog,
-  SellCatalog
-} from "./Layouts";
+import { HomePage, Buy, Sell, BuyForm, SellForm, BuySearch } from "./Layouts";
 
 class App extends Component {
   render() {
@@ -21,8 +13,7 @@ class App extends Component {
             <Route path="/sell" component={Sell} exact />
             <Route path="/addNewBuy" component={BuyForm} exact />
             <Route path="/addNewSell" component={SellForm} exact />
-            <Route path="/buyCatalog" componet={BuyCatalog} exact />
-            <Route path="/sellCatalog" component={SellCatalog} exact />
+            <Route path="/searchBuy" component={BuySearch} exact />
           </Switch>
         </Fragment>
       </BrowserRouter>

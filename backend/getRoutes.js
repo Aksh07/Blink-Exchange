@@ -39,6 +39,23 @@ router.get("/buy", (req, res) => {
   });
 });
 
+router.get("/buy:name", (req, res) => {
+  const name = req.param.name;
+  MongoClient.connect(uri, { useNewUrlParser: true }, (err, db) => {
+    if (err) throw err;
+    let dbo = db.db("BlinkDatabase");
+    dbo
+      .collection("buyItems")
+      .find({ productName: name })
+      .sort({ postDate: -1 })
+      .toArray((err, queryResult) => {
+        if (err) throw err;
+        res.json(queryResult);
+      });
+    db.close();
+  });
+});
+
 // Get all items from the sell list, in descending order of date
 
 router.get("/sell", (req, res) => {

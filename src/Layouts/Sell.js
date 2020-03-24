@@ -15,6 +15,7 @@ function Sell() {
     <Fragment>
       <Helmet>
         <style>{"body { background-color: #003366;}"}</style>
+        <title>Sell</title>
       </Helmet>
       <Header />
       <Grid
