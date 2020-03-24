@@ -5,6 +5,8 @@ import {
   Toolbar,
   Typography,
   makeStyles,
+  Menu,
+  MenuItem,
   Button
 } from "@material-ui/core";
 
@@ -31,6 +33,28 @@ const useStyles = makeStyles(theme => ({
 
 export default function Header() {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleHome = () => {
+    window.location.href = "/";
+  };
+
+  const handleBuy = () => {
+    window.location.href = "/buy";
+  };
+
+  const handleSell = () => {
+    window.location.href = "/sell";
+  };
 
   return (
     <AppBar position="static" color="secondary">
@@ -40,9 +64,23 @@ export default function Header() {
           className={classes.menuButton}
           color="inherit"
           aria-label="menu"
+          aria-controls="menuList"
+          aria-haspopup="true"
+          onClick={handleClick}
         >
           <MenuIcon />
         </IconButton>
+        <Menu
+          id="menuList"
+          anchorEl={anchorEl}
+          keepMounted
+          open={open}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleHome}>Home</MenuItem>
+          <MenuItem onClick={handleBuy}>Buy</MenuItem>
+          <MenuItem onClick={handleSell}>Sell</MenuItem>
+        </Menu>
         <Typography
           className={classes.title}
           variant="h5"
