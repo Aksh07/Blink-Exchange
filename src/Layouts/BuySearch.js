@@ -23,15 +23,17 @@ class BuySearch extends Component {
   };
 
   handleSearch = async () => {
-    let requestString = "/apis/get/buy:" + this.state.searchText;
+    let requestString = "/apis/get/buy/getByName" + this.state.searchText;
     const response = await fetch(requestString, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
-    if (response.status === 200) {
-      this.setState({ listOfItems: response.json() });
+    console.log(response);
+    if (response.status === 200 || response.status === 304) {
+      const jsonResponse = await response.json();
+      this.setState({ listOfItems: jsonResponse });
     }
   };
 
