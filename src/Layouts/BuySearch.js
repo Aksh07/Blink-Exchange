@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Header } from "../Containers";
+import { Header, BuyCard } from "../Containers";
 import Helmet from "react-helmet";
 import { Grid, Typography } from "@material-ui/core";
 import SearchBar from "material-ui-search-bar";
@@ -34,7 +34,22 @@ class BuySearch extends Component {
     if (response.status === 200 || response.status === 304) {
       const jsonResponse = await response.json();
       this.setState({ listOfItems: jsonResponse });
+      this.renderCards();
     }
+  };
+
+  renderCards = (itemName, photoSrc, deliveryDate, typeOfService, comments) => {
+    return (
+      <Grid item xs={5} md={5}>
+        <BuyCard
+          productName={itemName}
+          imgSrc={photoSrc}
+          dateOfDelivery={deliveryDate}
+          typeOfService={typeOfService}
+          comment={comments}
+        />
+      </Grid>
+    );
   };
 
   render() {
@@ -68,6 +83,13 @@ class BuySearch extends Component {
               />
             </MuiThemeProvider>
           </Grid>
+          <Grid
+            container
+            spacing={3}
+            direction="row"
+            justify="center"
+            alignItems="center"
+          ></Grid>
         </Grid>
       </Fragment>
     );

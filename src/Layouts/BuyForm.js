@@ -85,7 +85,7 @@ class BuyForm extends Component {
       currentDate: "2020-03-21",
       typeOfService: "",
       email: "",
-      commnets: ""
+      comments: ""
     });
   };
 
