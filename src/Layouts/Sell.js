@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { Header } from "../Containers";
 import Helmet from "react-helmet";
 import { Grid, Typography, Button } from "@material-ui/core";
 
@@ -17,7 +16,6 @@ function Sell() {
         <style>{"body { background-color: #003366;}"}</style>
         <title>Sell</title>
       </Helmet>
-      <Header />
       <Grid
         container
         spacing={10}

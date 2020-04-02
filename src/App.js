@@ -1,24 +1,35 @@
-import React, { Component, Fragment } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { HomePage, Buy, Sell, BuyForm, SellForm, BuySearch } from "./Layouts";
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Fragment>
-          <Switch>
-            <Route path="/" component={HomePage} exact />
-            <Route path="/buy" component={Buy} exact />
-            <Route path="/sell" component={Sell} exact />
-            <Route path="/addNewBuy" component={BuyForm} exact />
-            <Route path="/addNewSell" component={SellForm} exact />
-            <Route path="/searchBuy" component={BuySearch} exact />
-          </Switch>
-        </Fragment>
+        <Switch>
+          <Route path="/" component={HomePage} exact />
+          <PrivateRoute path="/buy" component={Buy} />
+          <PrivateRoute path="/sell" component={Sell} />
+          <PrivateRoute path="/addNewBuy" component={BuyForm} />
+          <PrivateRoute path="/addNewSell" component={SellForm} />
+          <PrivateRoute path="/searchBuy" component={BuySearch} />
+        </Switch>
       </BrowserRouter>
     );
   }
 }
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      localStorage.getItem("userData") ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      )
+    }
+  />
+);
 
 export default App;

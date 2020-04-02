@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Header, BuyCard } from "../Containers";
+import { BuyCard } from "../Containers";
 import Helmet from "react-helmet";
 import { Grid, Typography } from "@material-ui/core";
 import SearchBar from "material-ui-search-bar";
@@ -59,7 +59,6 @@ class BuySearch extends Component {
           <style>{"body { background-color: #003366;}"}</style>
           <title>Search an Item to Buy</title>
         </Helmet>
-        <Header />
         <Grid
           container
           spacing={8}

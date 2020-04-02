@@ -24,16 +24,16 @@ router.use(express.urlencoded({ extended: true }));
 
 // Add a new user
 
-router.post("/users", (req, res) => {
+router.post("/users", async (req, res) => {
   let newUser = req.body;
-  MongoClient.connect(uri, { useNewUrlParser: true }, (err, db) => {
+  MongoClient.connect(uri, { useNewUrlParser: true }, async (err, db) => {
     if (err) throw err;
-    let dbo = db.db("BlinkDatabase");
+    let dbo = await db.db("BlinkDatabase");
     dbo.collection("users").insertOne(newUser, (err, queryResult) => {
       if (err) throw err;
       res.sendStatus(200);
+      db.close();
     });
-    db.close();
   });
 });
 
@@ -54,8 +54,8 @@ router.post("/buy", async (req, res) => {
     dbo.collection("buyItems").insertOne(newBuyItem, (err, queryResult) => {
       if (err) throw err;
       res.sendStatus(200);
+      db.close();
     });
-    db.close();
   });
 });
 

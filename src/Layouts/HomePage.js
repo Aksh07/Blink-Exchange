@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { Header } from "../Containers";
 import Helmet from "react-helmet";
 import { Grid, Typography, Button } from "@material-ui/core";
 
@@ -17,7 +16,6 @@ function HomePage() {
         <style>{"body { background-color: #003366;}"}</style>
         <title>Home</title>
       </Helmet>
-      <Header />
       <Grid
         container
         spacing={10}
@@ -37,6 +35,8 @@ function HomePage() {
             <br />
             from unorganized Facebook groups to a straightforward and quick.
             <br /> interface.
+            <br />
+            <br /> Sign in using your Google account to get started!
           </Typography>
         </Grid>
         <Grid

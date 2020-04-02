@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { Header } from "../Containers";
 import Helmet from "react-helmet";
 import {
   Grid,
@@ -96,7 +95,6 @@ class BuyForm extends Component {
           <style>{"body { background-color: #003366;}"}</style>
           <title>Add a Buy Request</title>
         </Helmet>
-        <Header />
         <Grid
           container
           spacing={3}

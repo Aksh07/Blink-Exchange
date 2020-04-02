@@ -13,11 +13,15 @@ router.get("/users/getByUserId:id", (req, res) => {
   MongoClient.connect(uri, { useNewUrlParser: true }, (err, db) => {
     if (err) throw err;
     let dbo = db.db("BlinkDatabase");
-    dbo.collection("users").findOne({ username: id }, (err, queryResult) => {
+    dbo.collection("users").findOne({ googleId: id }, (err, queryResult) => {
       if (err) throw err;
-      res.json(queryResult);
+      console.log(queryResult);
+      if (queryResult == null) return res.sendStatus(404);
+      else {
+        res.status(200).json(queryResult);
+      }
+      db.close();
     });
-    db.close();
   });
 });
 
