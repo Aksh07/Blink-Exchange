@@ -79,6 +79,7 @@ class SellForm extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        userName: JSON.parse(localStorage.getItem("userData").userName),
         productName: this.state.productName,
         emailId: this.state.emailId,
         contactNo: this.state.contactNo,
