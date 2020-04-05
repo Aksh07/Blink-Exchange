@@ -9,25 +9,25 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Button
+  Button,
 } from "@material-ui/core";
 
 const style = {
   GridColor: {
     backgroundColor: "#003366",
-    marginTop: 100
+    marginTop: 100,
   },
   FormHeader: { font: "Roboto" },
   Button: { marginLeft: 20, marginRight: 20 },
-  TextField: { font: "Roboto" }
+  TextField: { font: "Roboto" },
 };
 
-const toBase64 = file =>
+const toBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 
 class SellForm extends Component {
@@ -38,62 +38,62 @@ class SellForm extends Component {
     currentDate: "2020-03-21",
     typeOfService: "",
     comments: "",
-    imgSrc: ""
+    imgSrc: "",
   };
 
-  handleNameChange = newValue => {
+  handleNameChange = (newValue) => {
     this.setState({ productName: newValue.target.value });
   };
 
-  handleEmailChange = newValue => {
+  handleEmailChange = (newValue) => {
     this.setState({ emailId: newValue.target.value });
   };
 
-  handlePhoneChange = newValue => {
+  handlePhoneChange = (newValue) => {
     this.setState({ contactNo: newValue.target.value });
   };
 
-  handleDateChange = newValue => {
+  handleDateChange = (newValue) => {
     this.setState({ currentDate: newValue.target.value });
   };
 
-  handleServiceChange = newValue => {
+  handleServiceChange = (newValue) => {
     this.setState({ typeOfService: newValue.target.value });
   };
 
-  handleCommentChange = newValue => {
+  handleCommentChange = (newValue) => {
     this.setState({ comments: newValue.target.value });
   };
 
-  handleImageChange = async picture => {
+  handleImageChange = async (picture) => {
     this.setState({ imgSrc: picture.target.files[0] });
   };
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     let base64Url = await toBase64(this.state.imgSrc);
     this.setState({ imgSrc: base64Url });
     const response = await fetch("/apis/post/buy", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userName: JSON.parse(localStorage.getItem("userData").userName),
+        userName: JSON.parse(sessionStorage.getItem("userData").userName),
         productName: this.state.productName,
         emailId: this.state.emailId,
         contactNo: this.state.contactNo,
         typeOfService: this.state.typeOfService,
         lastDeliveryDate: this.state.currentDate,
-        photoUrl: base64Url
-      })
+        photoUrl: base64Url,
+      }),
     });
     if (response.status === 200) {
       window.location.href = "/";
     } else this.handleClear();
   };
 
-  handleClear = async event => {
+  handleClear = async (event) => {
     event.preventDefault();
     this.setState({
       productName: "",
@@ -102,7 +102,7 @@ class SellForm extends Component {
       typeOfService: "",
       email: "",
       comments: "",
-      imgSrc: ""
+      imgSrc: "",
     });
   };
 

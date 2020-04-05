@@ -9,17 +9,17 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Button
+  Button,
 } from "@material-ui/core";
 
 const style = {
   GridColor: {
     backgroundColor: "#003366",
-    marginTop: 100
+    marginTop: 100,
   },
   FormHeader: { font: "Roboto" },
   Button: { marginLeft: 20, marginRight: 20 },
-  TextField: { font: "Roboto" }
+  TextField: { font: "Roboto" },
 };
 
 class BuyForm extends Component {
@@ -29,55 +29,55 @@ class BuyForm extends Component {
     contactNo: "",
     currentDate: "2020-03-21",
     typeOfService: "",
-    comments: ""
+    comments: "",
   };
 
-  handleNameChange = newValue => {
+  handleNameChange = (newValue) => {
     this.setState({ productName: newValue.target.value });
   };
 
-  handleEmailChange = newValue => {
+  handleEmailChange = (newValue) => {
     this.setState({ emailId: newValue.target.value });
   };
 
-  handlePhoneChange = newValue => {
+  handlePhoneChange = (newValue) => {
     this.setState({ contactNo: newValue.target.value });
   };
 
-  handleDateChange = newValue => {
+  handleDateChange = (newValue) => {
     this.setState({ currentDate: newValue.target.value });
   };
 
-  handleServiceChange = newValue => {
+  handleServiceChange = (newValue) => {
     this.setState({ typeOfService: newValue.target.value });
   };
 
-  handleCommentChange = newValue => {
+  handleCommentChange = (newValue) => {
     this.setState({ comments: newValue.target.value });
   };
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const response = await fetch("/apis/post/sell", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userName: JSON.parse(localStorage.getItem("userData").userName),
+        userName: JSON.parse(sessionStorage.getItem("userData").userName),
         productName: this.state.productName,
         emailId: this.state.emailId,
         contactNo: this.state.contactNo,
         typeOfService: this.state.typeOfService,
-        lastDeliveryDate: this.state.currentDate
-      })
+        lastDeliveryDate: this.state.currentDate,
+      }),
     });
     if (response.status === 200) {
       window.location.href = "/";
     } else this.handleClear();
   };
 
-  handleClear = async event => {
+  handleClear = async (event) => {
     event.preventDefault();
     this.setState({
       productName: "",
@@ -85,7 +85,7 @@ class BuyForm extends Component {
       currentDate: "2020-03-21",
       typeOfService: "",
       email: "",
-      comments: ""
+      comments: "",
     });
   };
 

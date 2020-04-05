@@ -5,7 +5,7 @@ import {
   Toolbar,
   Typography,
   Menu,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -15,20 +15,20 @@ import "typeface-roboto";
 
 const classes = {
   Typography: {
-    font: "Roboto"
+    font: "Roboto",
   },
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: 2
+    marginRight: 2,
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   para: {
-    marginRight: 1
-  }
+    marginRight: 1,
+  },
 };
 
 class Header extends Component {
@@ -36,10 +36,10 @@ class Header extends Component {
     anchorEl: null,
     isAuth: false,
     userName: "",
-    open: false
+    open: false,
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     this.setState({ anchorEl: event.currentTarget, open: true });
   };
 
@@ -69,73 +69,73 @@ class Header extends Component {
       this.setState(
         {
           userName: "Kunal",
-          isAuth: true
+          isAuth: true,
         },
         this.setState({
           loginUserMessage: "Hello " + this.state.userName,
-          loginButtonLabel: "Logout"
+          loginButtonLabel: "Logout",
         })
       );
     } else {
       this.setState({
         loginUserMessage: "",
         loginButtonLabel: "Login",
-        isAuth: false
+        isAuth: false,
       });
     }
   };
 
-  responseSuccessLogin = async res => {
+  responseSuccessLogin = async (res) => {
     let postData = {
       googleId: res.profileObj.googleId,
       userName: res.profileObj.name,
       email: res.profileObj.email,
-      access_token: res.tokenObj.access_token
+      access_token: res.tokenObj.access_token,
     };
     const query1 = "apis/get/users/getByUserId" + postData.googleId;
     const response1 = await fetch(query1, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     });
     if (response1.status === 200 || response1.status === 304) {
       let searchResponse = await response1.json();
-      localStorage.setItem("userData", JSON.stringify(searchResponse));
+      sessionStorage.setItem("userData", JSON.stringify(searchResponse));
       this.setState({ isAuth: true, userName: searchResponse.userName });
     } else {
       const response = await fetch("/apis/post/users", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
       if (response.status === 200 || response.status === 304) {
-        localStorage.setItem("userData", JSON.stringify(postData));
+        sessionStorage.setItem("userData", JSON.stringify(postData));
         this.setState({ isAuth: true, userName: postData.userName });
       }
     }
   };
 
-  responseFailLogin = response => {
+  responseFailLogin = (response) => {
     console.log(response);
   };
 
-  responseSuccessLogout = response => {
-    localStorage.removeItem("userData");
+  responseSuccessLogout = (response) => {
+    sessionStorage.removeItem("userData");
     this.setState({ isAuth: false, userName: "" });
     window.location.href = "/";
   };
 
-  responseFailLogout = response => {
+  responseFailLogout = (response) => {
     console.log(response);
   };
 
   componentDidMount() {
-    if (localStorage.getItem("userData")) {
-      const name = JSON.parse(localStorage.getItem("userData")).userName;
+    if (sessionStorage.getItem("userData")) {
+      const name = JSON.parse(sessionStorage.getItem("userData")).userName;
       this.setState({
         userName: name,
-        isAuth: true
+        isAuth: true,
       });
     }
   }
@@ -184,7 +184,7 @@ class Header extends Component {
   }
 
   renderAuth = () => {
-    if (!localStorage.getItem("userData") && this.state.isAuth === false) {
+    if (!sessionStorage.getItem("userData") && this.state.isAuth === false) {
       return (
         <GoogleLogin
           clientId="453656988650-dt7bjlklsjgd66jm3351e4tcv47hf2b2.apps.googleusercontent.com"
