@@ -52,7 +52,7 @@ function Buy() {
               color="secondary"
               align="left"
               size="large"
-              href="/buyCatalog"
+              href="/searchBuy"
             >
               <Typography style={style.HomeHeader} variant="h6">
                 Catalog
@@ -64,7 +64,7 @@ function Buy() {
               color="secondary"
               align="left"
               size="large"
-              href="/searchBuy"
+              href="/buyCatalog"
             >
               <Typography style={style.HomeHeader} variant="h6">
                 Search for an Item
