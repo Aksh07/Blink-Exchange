@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { HomePage, Buy, Sell, BuyForm, SellForm, BuySearch } from "./Layouts";
+import { HomePage, Buy, Sell, BuyForm, SellForm, BuyCatalog } from "./Layouts";
 
 class App extends Component {
   render() {
@@ -12,7 +12,7 @@ class App extends Component {
           <PrivateRoute path="/sell" component={Sell} />
           <PrivateRoute path="/addNewBuy" component={BuyForm} />
           <PrivateRoute path="/addNewSell" component={SellForm} />
-          <PrivateRoute path="/searchBuy" component={BuySearch} />
+          <PrivateRoute path="/buyCatalog" component={BuyCatalog} />
         </Switch>
       </BrowserRouter>
     );
@@ -22,8 +22,8 @@ class App extends Component {
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
-      localStorage.getItem("userData") ? (
+    render={(props) =>
+      sessionStorage.getItem("userData") ? (
         <Component {...props} />
       ) : (
         <Redirect to={{ pathname: "/", state: { from: props.location } }} />

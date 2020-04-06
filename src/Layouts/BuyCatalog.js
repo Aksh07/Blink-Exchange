@@ -14,82 +14,40 @@ const style = {
   CardColor2: { background: "steelblue" },
 };
 
-const items = [
-  {
-    name: "Bat",
-    type: "Product",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265072717-b68d14e15187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-  {
-    name: "Elephant",
-    type: "Service",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265512283-2d72b64974a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-  {
-    name: "Bat",
-    type: "Product",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265072717-b68d14e15187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-  {
-    name: "Bat",
-    type: "Product",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265072717-b68d14e15187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-  {
-    name: "Bat",
-    type: "Product",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265072717-b68d14e15187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-  {
-    name: "Bat",
-    type: "Product",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265072717-b68d14e15187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-  {
-    name: "Bat",
-    type: "Product",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265072717-b68d14e15187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-  {
-    name: "Bat",
-    type: "Product",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265072717-b68d14e15187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-  {
-    name: "Bat",
-    type: "Product",
-    imgURL:
-      "https://images.unsplash.com/photo-1583265072717-b68d14e15187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    lastDate: "03/02/2020",
-    desc: "tba",
-  },
-];
-
 function BuyCatalog() {
+  const [items, setItems] = React.useState([]);
+  const [searchText, setSearchText] = React.useState("");
+  const [renderItems, setRenderItems] = React.useState("");
+
+  const handleSearchChange = (newValue) => {
+    setSearchText(newValue);
+  };
+
+  const handleSearch = async () => {
+    await setItems([]);
+    await setRenderItems("");
+    const query = "/apis/get/buy/getByName" + searchText;
+    const response = await fetch(query, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    if (response.status === 200 || response.status === 304) {
+      const result = await response.json();
+      setItems(result);
+      const newExpr = await items.map(async (newItem) => {
+        return (
+          <Grid item md="3" direction="column">
+            <BuyCard item={newItem} />
+          </Grid>
+        );
+      });
+      console.log(newExpr);
+      await setRenderItems(newExpr);
+    }
+  };
+
   return (
     <Fragment>
       <Helmet>
@@ -116,12 +74,13 @@ function BuyCatalog() {
       <br /> <br />
       <MuiThemeProvider>
         <SearchBar
-          onChange={() => console.log("onChange")}
-          onRequestSearch={() => console.log("onRequestSearch")}
+          onChange={handleSearchChange}
+          onRequestSearch={handleSearch}
           style={{
             margin: "0 auto",
             maxWidth: 800,
           }}
+          value={searchText}
         />
       </MuiThemeProvider>
       <br />
@@ -168,13 +127,7 @@ function BuyCatalog() {
           alignItems="center"
           spacing="8"
         >
-          {items.map((newItem) => {
-            return (
-              <Grid item md="3" direction="column">
-                <BuyCard item={newItem} />
-              </Grid>
-            );
-          })}
+          {renderItems}
         </Grid>{" "}
       </div>
     </Fragment>
