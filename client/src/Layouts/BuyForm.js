@@ -64,7 +64,7 @@ class BuyForm extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userName: JSON.parse(sessionStorage.getItem("userData").userName),
+        userName: await JSON.parse(sessionStorage.getItem("userData")).userName,
         productName: this.state.productName,
         emailId: this.state.emailId,
         contactNo: this.state.contactNo,
