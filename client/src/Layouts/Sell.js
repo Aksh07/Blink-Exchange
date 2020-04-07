@@ -6,7 +6,7 @@ const style = {
   GridColor: { color: "#003366" },
   HomeHeader: { font: "Roboto", color: "white", marginTop: 10 },
   Paragraph: { font: "Times New Roman", color: "white", fontStyle: "italic" },
-  Button: { marginLeft: 20, marginRight: 20 }
+  Button: { marginLeft: 20, marginRight: 20 },
 };
 
 function Sell() {
@@ -56,18 +56,6 @@ function Sell() {
             >
               <Typography style={style.HomeHeader} variant="h6">
                 Catalog
-              </Typography>
-            </Button>
-            <Button
-              style={style.Button}
-              variant="contained"
-              color="secondary"
-              align="left"
-              size="large"
-              href="/searchSell"
-            >
-              <Typography style={style.HomeHeader} variant="h6">
-                Search for an Item
               </Typography>
             </Button>
             <Button

@@ -37,6 +37,7 @@ router.get("/buy", (req, res) => {
       .sort({ postDate: -1 })
       .toArray((err, queryResult) => {
         if (err) throw err;
+        res.status(200);
         res.json(queryResult);
       });
     db.close();
@@ -78,6 +79,7 @@ router.get("/sell/getByName:name", (req, res) => {
       .toArray((err, queryResult) => {
         if (err) throw err;
         console.log(queryResult);
+        res.status(200);
         res.json(queryResult);
       });
     db.close();
@@ -96,6 +98,7 @@ router.get("/sell", (req, res) => {
       .sort({ postDate: -1 })
       .toArray((err, queryResult) => {
         if (err) throw err;
+        res.status(200);
         res.json(queryResult);
       });
     db.close();

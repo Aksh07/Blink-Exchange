@@ -58,18 +58,7 @@ function Buy() {
                 Catalog
               </Typography>
             </Button>
-            <Button
-              style={style.Button}
-              variant="contained"
-              color="secondary"
-              align="left"
-              size="large"
-              href="/searchBuy"
-            >
-              <Typography style={style.HomeHeader} variant="h6">
-                Search for an Item
-              </Typography>
-            </Button>
+           
             <Button
               style={style.Button}
               variant="contained"

@@ -86,6 +86,7 @@ class SellForm extends Component {
         typeOfService: this.state.typeOfService,
         lastDeliveryDate: this.state.currentDate,
         photoUrl: base64Url,
+        desc: this.state.comments,
       }),
     });
     if (response.status === 200) {

@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Card,
-  CardMedia,
   CardContent,
   CardActions,
   Typography,
@@ -48,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BuyCard({ item }) {
+export default function SellCard({ item }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -64,11 +63,6 @@ export default function BuyCard({ item }) {
         }
         title={item.productName}
         subheader={item.typeOfService}
-      />
-      <CardMedia
-        className={classes.media}
-        image={item.photoUrl}
-        title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">

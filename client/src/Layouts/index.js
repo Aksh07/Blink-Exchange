@@ -3,7 +3,7 @@ import Buy from "./Buy";
 import Sell from "./Sell";
 import BuyForm from "./BuyForm";
 import SellForm from "./SellForm";
-import BuySearch from "./BuySearch";
 import BuyCatalog from "./BuyCatalog";
+import SellCatalog from "./SellCatalog";
 
-export { HomePage, Buy, Sell, BuyForm, SellForm, BuySearch, BuyCatalog };
+export { HomePage, Buy, Sell, BuyForm, SellForm, BuyCatalog, SellCatalog };

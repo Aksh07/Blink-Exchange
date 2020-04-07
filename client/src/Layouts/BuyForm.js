@@ -70,6 +70,7 @@ class BuyForm extends Component {
         contactNo: this.state.contactNo,
         typeOfService: this.state.typeOfService,
         lastDeliveryDate: this.state.currentDate,
+        desc: this.state.comments,
       }),
     });
     if (response.status === 200) {

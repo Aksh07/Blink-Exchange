@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { HomePage, Buy, Sell, BuyForm, SellForm, BuyCatalog } from "./Layouts";
+import {
+  HomePage,
+  Buy,
+  Sell,
+  BuyForm,
+  SellForm,
+  BuyCatalog,
+  SellCatalog,
+} from "./Layouts";
 
 class App extends Component {
   render() {
@@ -13,6 +21,7 @@ class App extends Component {
           <PrivateRoute path="/addNewBuy" component={BuyForm} />
           <PrivateRoute path="/addNewSell" component={SellForm} />
           <PrivateRoute path="/buyCatalog" component={BuyCatalog} />
+          <PrivateRoute path="/sellCatalog" component={SellCatalog} />
         </Switch>
       </BrowserRouter>
     );

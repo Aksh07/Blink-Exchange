@@ -121,7 +121,7 @@ class Header extends Component {
   };
 
   responseSuccessLogout = (response) => {
-    sessionStorage.removeItem("userData");
+    sessionStorage.clear();
     this.setState({ isAuth: false, userName: "" });
     window.location.href = "/";
   };
