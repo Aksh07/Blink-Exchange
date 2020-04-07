@@ -57,6 +57,7 @@ router.get("/buy/getByName:name", (req, res) => {
       .toArray((err, queryResult) => {
         if (err) throw err;
         console.log(queryResult);
+        res.status(200);
         res.json(queryResult);
       });
     db.close();
