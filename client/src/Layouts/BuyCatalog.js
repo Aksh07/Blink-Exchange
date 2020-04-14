@@ -22,6 +22,7 @@ class BuyCatalog extends Component {
 
   async componentDidMount() {
     this.initialRenderItems();
+    sessionStorage.removeItem("sellSearchData");
   }
 
   initialRenderItems = async () => {
@@ -88,7 +89,10 @@ class BuyCatalog extends Component {
     if (response.status === 200 || response.status === 304) {
       const result = await response.json();
       console.log(result);
-      await sessionStorage.setItem("buySearchData", await JSON.stringify(result));
+      await sessionStorage.setItem(
+        "buySearchData",
+        await JSON.stringify(result)
+      );
       window.location.href = "/buyCatalog";
     }
   };

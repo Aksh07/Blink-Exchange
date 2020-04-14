@@ -13,7 +13,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from "@material-ui/icons/Favorite";
 
 const style = {
   GridColor: { color: "#003366" },

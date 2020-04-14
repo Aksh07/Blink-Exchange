@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Helmet from "react-helmet";
 import { Grid, Typography, Button } from "@material-ui/core";
+import { useEffect } from "react";
 
 const style = {
   GridColor: { color: "#003366" },
@@ -10,6 +11,11 @@ const style = {
 };
 
 function Sell() {
+  
+  useEffect(() => {
+    sessionStorage.removeItem("buySearchData");
+    sessionStorage.removeItem("sellSearchData");
+  });
   return (
     <Fragment>
       <Helmet>

@@ -32,6 +32,11 @@ class BuyForm extends Component {
     comments: "",
   };
 
+  componentDidMount() {
+    sessionStorage.removeItem("buySearchData");
+    sessionStorage.removeItem("sellSearchData");
+  }
+
   handleNameChange = (newValue) => {
     this.setState({ productName: newValue.target.value });
   };

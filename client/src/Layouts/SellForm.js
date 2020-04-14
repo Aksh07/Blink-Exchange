@@ -41,6 +41,11 @@ class SellForm extends Component {
     imgSrc: "",
   };
 
+  componentDidMount() {
+    sessionStorage.removeItem("buySearchData");
+    sessionStorage.removeItem("sellSearchData");
+  }
+
   handleNameChange = (newValue) => {
     this.setState({ productName: newValue.target.value });
   };

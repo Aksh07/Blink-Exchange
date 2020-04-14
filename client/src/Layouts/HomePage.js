@@ -6,10 +6,15 @@ const style = {
   GridColor: { color: "#003366" },
   HomeHeader: { font: "Roboto", color: "white", marginTop: 10 },
   Paragraph: { font: "Times New Roman", color: "white", fontStyle: "italic" },
-  Button: { marginLeft: 20, marginRight: 20 }
+  Button: { marginLeft: 20, marginRight: 20 },
 };
 
 function HomePage() {
+  React.useEffect(() => {
+    sessionStorage.removeItem("buySearchData");
+    sessionStorage.removeItem("sellSearchData");
+  });
+
   return (
     <Fragment>
       <Helmet>

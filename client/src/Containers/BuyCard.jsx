@@ -8,6 +8,13 @@ import {
   IconButton,
   CardHeader,
   Collapse,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+  TextField,
 } from "@material-ui/core";
 
 import clsx from "clsx";
@@ -51,20 +58,90 @@ const useStyles = makeStyles((theme) => ({
 export default function BuyCard({ item }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [bidValue, setBidValue] = React.useState("");
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setBidValue("");
+    setOpen(false);
+  };
+
+  const handleBidChange = (event) => {
+    setBidValue(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    if (bidValue === "") return;
+    console.log(item);
+    let postItem = await {
+      user: await JSON.parse(sessionStorage.getItem("userData")).googleId,
+      _id: await item._id,
+      bid: await bidValue,
+    };
+    let queryString =
+      "/apis/put/placeBidfor" + (await JSON.stringify(postItem));
+    const response = await fetch(queryString, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.status === 200) {
+      setBidValue("");
+      setOpen(false);
+    }
+  };
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   return (
     <Card className={classes.root} style={style.CardColor2}>
       <CardHeader
         action={
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label="Place a bid" onClick={handleOpen}>
             <FavoriteIcon />
           </IconButton>
         }
         title={item.productName}
         subheader={item.typeOfService}
       />
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Place a Bid</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Describe what you would like to offer to the seller to buy this
+            item.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            onChange={handleBidChange}
+            id="name"
+            label="Your Bid"
+            type="email"
+            value={bidValue}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSubmit} color="primary">
+            Place
+          </Button>
+        </DialogActions>
+      </Dialog>
       <CardMedia
         className={classes.media}
         image={item.photoUrl}

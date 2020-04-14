@@ -22,6 +22,7 @@ class SellCatalog extends Component {
 
   async componentDidMount() {
     this.initialRenderItems();
+    sessionStorage.removeItem("buySearchData");
   }
 
   initialRenderItems = async () => {
